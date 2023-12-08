@@ -16,28 +16,28 @@ class ObservableAppState extends EventEmitter {
     dateUpdated: Date('12/7/21')
     }),
     new Jot({
-    title:'A',
+    title:'b',
     body:'',
     color: 'black',
     dateCreated: Date('11/1/20'),
     dateUpdated: Date('12/7/21')
     }),
     new Jot({
-    title:'A',
+    title:'c',
     body:'',
     color: 'black',
     dateCreated: Date('11/1/20'),
     dateUpdated: Date('12/7/21')
     }),
     new Jot({
-    title:'A',
+    title:'c',
     body:'',
     color: 'black',
     dateCreated: Date('11/1/20'),
     dateUpdated: Date('12/7/21')
     }),
     new Jot({
-    title:'A',
+    title:'d',
     body:'',
     color: 'black',
     dateCreated: Date('11/1/20'),
