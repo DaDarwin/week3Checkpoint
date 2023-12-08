@@ -1,8 +1,51 @@
-<section class="row">
-  <div class="col-3" id="jots"></div>
-  <div class="col-9" id="activeJot"></div>
+<section class="row bg-dark text-light justify-content-center">
+
+<nav class="d-flex justify-content-between align-items-baseline border-bottom border-2 border-light my-2 p-1">
+  <button class="btn btn-outline-light px-2 py-0 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fs-3 mdi mdi-menu"></i></button>
+  <h1>Jot</h1>
+  <div></div>
+</nav>
+  
+  <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Jot</h5>
+      <button type="button" class="btn btn-outline-light p-1" data-bs-dismiss="offcanvas" aria-label="Close"> <i class="mdi mdi-window-close fs-4"></i> </button>
+    </div>
+      <div class="offcanvas-body" id="jots">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot">
+
+    <div class="w-75" id="activeJot">
+
+      <div class="d-flex justify-content-between border-bottom border-2 border-light mb-3">
+        <h1>$this.title</h1> 
+        <h3>${this.dateUpdated}</h3>
+      </div>
+
+      <div class="form-floating">
+        <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label class="text-center" for="floatingTextarea">Jot it down!</label>
+      </div>
+    </div>
+
+  </div>
+
 </section>
-<section class="row">
 
   <!-- <div class="col-2 bg-dark text-light rounded p-2" id="jots">
     <div class="row">
@@ -14,15 +57,15 @@
     </div>
   </div> -->
 
-  <div class="col-9" id="activeJot">
 
-    <div class="bg-dark text-light">
-      <br class="">
-      <div>
-        <h1>$this.title</h1> <h3>${this.dateUpdated}</h3>
+    <!-- <div class="w-75">
+      <div class="d-flex justify-content-between border-bottom border-2 border-light mb-3">
+        <h1>$this.title</h1> 
+        <h3>${this.dateUpdated}</h3>
       </div>
-      <textarea class="bg-dark w-75 text-light" name="Jot" id="activeJot" cols="30" rows="10"></textarea>
-    </div>
+      <div class="form-floating">
+        <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label class="text-center" for="floatingTextarea">Jot it down!</label>
+      </div>
+    </div> -->
 
-  </div>
-</section>
