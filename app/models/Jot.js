@@ -17,7 +17,7 @@ export class Jot{
 
     get jotIcon(){
         return `
-        <div class="col-2 bg-dark text-light rounded py-2 px-4 m-1 mb-2 icon border border-light" onclick="app.JotController.selectJot('${this.id}')">
+        <div class="col-2 bg-dark text-light rounded py-2 px-4 m-1 mb-2 icon border border-light" onclick="app.JotController.selectJot('${this.id}')" data-bs-toggle="offcanvas">
 
             <div class="row align-items-baseline" >
 
@@ -43,8 +43,8 @@ export class Jot{
         </div>
   
         <div class="form-floating">
-          <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
-          <label class="text-center" for="jotBox">Jot it down!</label>
+        <label class="text-center w-100 h-100" for="jotBox">Jot it down!</label>
+        <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
         </div>
       </div>`
     }

@@ -14,12 +14,34 @@
 </nav>
   
   <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
     <div class="offcanvas-header border-bottom border-2 border-light">
+
       <h1 class="offcanvas-title" id="offcanvasExampleLabel">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
+
       <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close"> <i class="mdi mdi-window-close fs-4"></i> </button>
+
     </div>
+
+    <div class="d-flex flex-column justify-content-between sidebar">
+
       <div class="offcanvas-body" id="jots"></div>
+
+      <div>
+
+        <form onsubmit="app.JotController.addJot()" class="d-flex justify-content-center rounded-0">
+          <!-- /**FIXME - Rounded Form -->
+        
+          <input type="text" class="form-control w-75 rounded-start-3" name="title" placeholder="Title">
+
+          <button class="btn btn-outline-light rounded-end-3" title="New Jot"><i class="mdi mdi-file"></i></button>
       
+        </form>
+
+      </div>
+      
+    </div>
+
   </div>
 
   <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot">
