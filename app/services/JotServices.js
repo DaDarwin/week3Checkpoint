@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js";
+import { JotController } from "../controllers/JotController.js";
 import { Jot } from "../models/Jot.js";
 import { loadState, saveState } from "../utils/Store.js";
 
@@ -36,6 +37,21 @@ class JotServices{
         const coldJots = loadState('Jots', [Jot])
         AppState.jots = coldJots
       }
+
+    addJot(newJot){
+        AppState.jots.push(new Jot(newJot))
+        this.saveJots()
+    }
+
+    deleteJot(id){  
+        const i = AppState.jots.findIndex(jot => jot.id == id)
+        if(id == AppState.activeJot.id){
+            AppState.activeJot == null
+            JotController.goHome()
+        }
+        AppState.jots.splice(i,1)
+        this.saveJots()
+    }
 
 }
 

@@ -4,11 +4,11 @@ export class Jot{
 
     constructor(data){
         this.title = data.title
-        this.body = data.body
+        this.body = data.body || ''
         this.id = data.id || generateId()
         this.color = data.color
-        this.dateCreated = data.dateCreated
-        this.dateUpdated = data.dateUpdated
+        this.dateCreated = data.dateCreated || Date()
+        this.dateUpdated = data.dateUpdated || ''
     }
 
     // get Jotdate(){
@@ -17,17 +17,19 @@ export class Jot{
 
     get jotIcon(){
         return `
-        <div class="col-2 bg-dark text-light rounded py-2 px-4 m-1 mb-2 icon border border-light" onclick="app.JotController.selectJot('${this.id}')" data-bs-toggle="offcanvas">
+        <div class="col-2 bg-dark text-light rounded py-2 px-4 m-1 mb-2 icon border border-light">
 
-            <div class="row align-items-baseline" >
+            <div class="row align-items-baseline ">
 
-                <h4 class="w-75">${this.title}</h4>
+                <div class="w-75" onclick="app.JotController.selectJot('${this.id}')" data-bs-toggle="offcanvas">
+                    <h4>${this.title}</h4>
+                </div>      
 
-                <button class="w-25 btn btn-outline-danger">
+                <button class="w-25 btn btn-outline-danger" onclick="app.JotController.deleteJot('${this.id}')">
                     <i class="mdi mdi-trash-can-outline"></i>
                 </button>
 
-            </div>      
+            </div>
         </div>
             `
             // <h5>${this.dateUpdated}</h5>

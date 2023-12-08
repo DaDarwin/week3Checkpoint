@@ -1,6 +1,8 @@
 import { AppState } from "../AppState.js";
 import { Jot } from "../models/Jot.js";
 import { jotServices } from "../services/JotServices.js";
+import { getFormData } from "../utils/FormHandler.js";
+import { Pop } from "../utils/Pop.js";
 
 function _drawJots(){
     const jots = AppState.jots
@@ -17,10 +19,9 @@ function _drawActiveJot(){
 export class JotController{
 
     constructor(){
-        jotServices.loadJots()
-        _drawJots()
-        AppState.on('activeJot', _drawActiveJot)
         AppState.on('jots', _drawJots)
+        jotServices.loadJots()
+        AppState.on('activeJot', _drawActiveJot)
     }
 
 
@@ -31,5 +32,21 @@ export class JotController{
 
     saveActive(){
         jotServices.saveActive()
+    }
+
+    addJot(){
+        event.preventDefault()
+        const newJot = getFormData(event.target)
+        jotServices.addJot(newJot)
+    }
+
+    async deleteJot(id){
+       if(await Pop.confirm('Are You Sure?', "This Jot will be lost forever(That's a long time).", "Yes, I'm Sure")){
+        jotServices.deleteJot(id)
+       }
+    }
+
+    goHome(){
+        document.getElementById('jotBox').innerHtml = ''
     }
 }
