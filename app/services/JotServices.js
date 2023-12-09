@@ -13,7 +13,7 @@ class JotServices{
     saveActive(){
         const active = AppState.activeJot
         active.body = document.getElementById('jotBox').value
-        active.dateUpdated = Date()
+        active.dateUpdated = new Date()
         console.log(active)
 
         AppState.jots.forEach(jot => console.log('Index:',jot.id))

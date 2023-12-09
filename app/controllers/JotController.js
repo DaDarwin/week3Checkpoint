@@ -4,14 +4,14 @@ import { getFormData } from "../utils/FormHandler.js";
 import { Pop } from "../utils/Pop.js";
 
 function _goHome(){
-    document.getElementById('activeJot').innerHTML = AppState.landing
+    document.getElementById('Jot.').innerHTML = AppState.landing + AppState.offCanvas
+    _drawJots()
 }
 function _drawJots(){
     const jots = AppState.jots
     let content = ''
     jots.forEach(jot => content += jot.jotIcon)
     document.getElementById('jots').innerHTML = content
-    document.getElementById('jots#').innerText = `Jots: ${AppState.jots.length}`
 }
 /**NOTE - Ask for a better way */
 function _drawActiveJot(){
@@ -22,8 +22,15 @@ function _drawActiveJot(){
     else{
         _goHome()
     }
-
 }
+
+function _drawNum(){
+    if(document.getElementById('jotNum').innerText) document.getElementById('jotNum').innerText = ''
+
+    
+    else document.getElementById('jotNum').innerText = `Jots: ${AppState.jots.length}`
+}
+
 
 export class JotController{
 
@@ -37,10 +44,11 @@ export class JotController{
 
 
     selectJot(id){
-        if(id){
+        if(id != 0 && 1){
             jotServices.selectJot(id)
         }
-        else _goHome()
+        if(id == 0) _goHome()
+        else _drawNum()
     }
 
     saveActive(){

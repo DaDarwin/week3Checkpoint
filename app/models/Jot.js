@@ -5,6 +5,7 @@ export class Jot{
     constructor(data){
         this.title = data.title
         this.body = data.body || ''
+        this.type = data.type
         this.id = data.id || generateId()
         this.color = data.color
         this.dateCreated = data.dateCreated || Date()
@@ -14,15 +15,16 @@ export class Jot{
 
     get jotIcon(){
         return `
-        <div class="col-2 bg-dark rounded py-2 px-4 m-1 mb-2 icon border" style="border-color:${this.color}!important; color:${this.color}!important;">
+        <div class="col-2 bg-dark rounded py-2 px-4 m-1 mb-2 icon border">
 
-            <div class="row align-items-baseline ">
+            <div class="row align-items-baseline justify-content-between">
 
-                <div class="w-75" onclick="app.JotController.selectJot('${this.id}')" data-bs-toggle="offcanvas">
-                    <h4>${this.title}</h4>
-                </div>      
+                <div class="w-75" onclick="app.JotController.selectJot('${this.id}')" title="Open ${this.title}" data-bs-toggle="offcanvas">
+                    <h4>${this.title} <i class="${this.type} w-25 fs-4" style="color:${this.color}!important;"></i></h4>
+                </div> 
+                
 
-                <button class="w-25 btn btn-outline-danger" onclick="app.JotController.deleteJot('${this.id}')">
+                <button class="w-25 btn btn-outline-danger" onclick="app.JotController.deleteJot('${this.id}')" title="Delete ${this.title}">
                     <i class="mdi mdi-trash-can-outline"></i>
                 </button>
 
@@ -33,7 +35,7 @@ export class Jot{
     /**NOTE - Ask about the date using or (||) for templates */
     get jotBody(){
         return `
-        <div class="w-75" id="activeJot">
+        <div class="w-75">
 
         <div class="d-flex justify-content-between align-items-end border-bottom border-2 border-light mb-3">
           <h1>${this.title}</h1> 
