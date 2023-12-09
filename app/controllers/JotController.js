@@ -9,6 +9,7 @@ function _drawJots(){
     let content = ''
     jots.forEach(jot => content += jot.jotIcon)
     document.getElementById('jots').innerHTML = content
+    document.getElementById('jots#').innerText = `Jots: ${AppState.jots.length}`
 }
 
 function _drawActiveJot(){

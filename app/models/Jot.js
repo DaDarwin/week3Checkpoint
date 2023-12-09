@@ -17,7 +17,7 @@ export class Jot{
 
     get jotIcon(){
         return `
-        <div class="col-2 bg-dark text-light rounded py-2 px-4 m-1 mb-2 icon border border-light">
+        <div class="col-2 bg-dark rounded py-2 px-4 m-1 mb-2 icon border" style="border-color:${this.color}!important; color:${this.color}!important;">
 
             <div class="row align-items-baseline ">
 
@@ -45,7 +45,7 @@ export class Jot{
         </div>
   
         <div class="form-floating">
-        <label class="text-center w-100 h-100" for="jotBox">Jot it down!</label>
+        <label class="text-center w-100 h-100" for="jotBox" style="color:${this.color}">Jot it down!</label>
         <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
         </div>
       </div>`
