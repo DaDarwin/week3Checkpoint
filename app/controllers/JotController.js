@@ -1,9 +1,11 @@
 import { AppState } from "../AppState.js";
-import { Jot } from "../models/Jot.js";
 import { jotServices } from "../services/JotServices.js";
 import { getFormData } from "../utils/FormHandler.js";
 import { Pop } from "../utils/Pop.js";
 
+function _goHome(){
+    document.getElementById('activeJot').innerHTML = AppState.landing
+}
 function _drawJots(){
     const jots = AppState.jots
     let content = ''
@@ -11,13 +13,14 @@ function _drawJots(){
     document.getElementById('jots').innerHTML = content
     document.getElementById('jots#').innerText = `Jots: ${AppState.jots.length}`
 }
-
+/**NOTE - Ask for a better way */
 function _drawActiveJot(){
     if(AppState.activeJot){
-        document.getElementById('activeJot').innerHTML = AppState.activeJot.jotBody
+        document.getElementById('activeJot').innerHTML = AppState.nav
+        document.getElementById('activeJot').innerHTML += AppState.activeJot.jotBody
         document.getElementById('jotBox').value = AppState.activeJot.body}
     else{
-        document.getElementById('activeJot').innerHTML = ''
+        _goHome()
     }
 
 }
@@ -25,6 +28,7 @@ function _drawActiveJot(){
 export class JotController{
 
     constructor(){
+        _goHome()
         AppState.on('jots', _drawJots)
         jotServices.loadJots()
         AppState.on('activeJot', _drawActiveJot)
@@ -33,7 +37,10 @@ export class JotController{
 
 
     selectJot(id){
-        jotServices.selectJot(id)
+        if(id){
+            jotServices.selectJot(id)
+        }
+        else _goHome()
     }
 
     saveActive(){

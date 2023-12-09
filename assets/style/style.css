@@ -27,3 +27,39 @@
 .sidebar{
     min-height: 90vh;
 }
+
+.landing{
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 300px;
+}
+
+.landing-logo{
+    color: white;
+    height: 360px !important;
+    border-radius: 10%;
+}
+
+.landing-logo:hover{
+    cursor: pointer;
+    color: black;
+    border-color: black !important;
+}
+
+.jot-logo{
+    height: 45px;
+    border-radius: 10%;
+}
+
+.jot-logo:hover{
+    cursor: pointer;
+    color: black;
+    border-color: black !important;
+}
+
+#nav{
+    display: none;
+}

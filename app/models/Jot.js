@@ -11,9 +11,6 @@ export class Jot{
         this.dateUpdated = data.dateUpdated || ''
     }
 
-    // get Jotdate(){
-    //     // console.log(this.dateCreated)
-    // }
 
     get jotIcon(){
         return `
@@ -32,21 +29,21 @@ export class Jot{
             </div>
         </div>
             `
-            // <h5>${this.dateUpdated}</h5>
     }
-
+    /**NOTE - Ask about the date using or (||) for templates */
     get jotBody(){
         return `
         <div class="w-75" id="activeJot">
 
-        <div class="d-flex justify-content-between border-bottom border-2 border-light mb-3">
+        <div class="d-flex justify-content-between align-items-end border-bottom border-2 border-light mb-3">
           <h1>${this.title}</h1> 
-          <h3>${this.dateUpdated}</h3>
+          <h4>${this.dateCreated.slice(4,this.dateCreated.length - 43)}</h4>
         </div>
   
         <div class="form-floating">
         <label class="text-center w-100 h-100" for="jotBox" style="color:${this.color}">Jot it down!</label>
         <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
+        <h6 class="w-100 text-center mt-1">Last Saved: ${this.dateUpdated.slice(4,this.dateUpdated.length - 47)} @ ${this.dateUpdated.slice(16, 21)}</h6>
         </div>
       </div>`
     }

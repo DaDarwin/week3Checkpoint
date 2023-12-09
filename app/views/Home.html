@@ -1,19 +1,65 @@
-<section class="row bg-dark text-light justify-content-center">
 
-<nav class="d-flex justify-content-between align-items-baseline border-bottom border-2 border-light my-2 p-1">
-
-  <button class="btn btn-outline-light px-2 py-0 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    <i class="fs-3 mdi mdi-menu"></i>
-  </button>
-
-  <h1 class="title">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
-
-  <button class="btn btn-outline-light px-2 py-0 m-2" onclick="app.JotController.saveActive()">
-    <i class="fs-3 mdi mdi-floppy"></i>
-  </button>
-</nav>
+<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="jotList" aria-labelledby="offcanvasExampleLabel">
   
-  <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header border-bottom border-2 border-light">
+    
+      <h1 class="offcanvas-title" id="offcanvasExampleLabel">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
+  
+      <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close"> <i class="mdi mdi-window-close fs-4"></i> </button>
+      
+    </div>
+    
+    <div class="d-flex flex-column justify-content-between sidebar">
+  
+      <h5 id="jots#" class="m-2">Jots 0</h5>
+      
+      <div class="offcanvas-body" id="jots">
+        
+      </div>
+      
+      <div class="container-fluid">
+  
+        <form onsubmit="app.JotController.addJot()" id="addJot" class="row border border-light p-2 rounded">
+          <div class="w-100 ">
+            <input required type="text" minlength="3" maxlength="15" class="form-control w-100 m-1 px-5" name="title" placeholder="Title">
+          </div>
+          
+          <div class="d-flex justify-content-around w-100 px-2">
+            
+            <input type="color" name="color" class="form-control h-75 w-75 m-1 bg-dark" value="#e9ecef">
+            
+            <button class="btn btn-outline-light rounded-end-3 h-75 w-25 m-1" title="New Jot"><i class="mdi mdi-file"></i></button>
+            
+          </div>
+      
+        </form>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  
+<section id="activeJot" class="row bg-dark text-light justify-content-center"></section>
+
+  <!-- <div id="landing" class="landing d-flex justify-content-center align-items-center">
+    <span class="landing-logo p-0 border-bottom border-3 border-light bg-dark px-3 pb-1" data-bs-toggle="offcanvas" data-bs-target="#jotList">J<i class="mdi mdi-circle-edit-outline"></i>T.</span>
+  </div> -->
+
+  <!-- <nav id="nav" class="d-flex justify-content-between align-items-baseline border-bottom border-2 border-light my-2 p-1">
+
+    <button class="btn btn-outline-light px-2 py-0 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#jotList" aria-controls="offcanvasExample">
+      <i class="fs-3 mdi mdi-menu"></i>
+    </button>
+
+    <h1 class="jot-logo border-bottom border-light">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
+
+    <button class="btn btn-outline-light px-2 py-0 m-2" onclick="app.JotController.saveActive()">
+      <i class="fs-3 mdi mdi-floppy"></i>
+    </button>
+  </nav>
+  
+  <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="jotList" aria-labelledby="offcanvasExampleLabel">
 
     <div class="offcanvas-header border-bottom border-2 border-light">
 
@@ -54,24 +100,20 @@
 
   </div>
 
-  <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot">
+  <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot"></div> -->
+  
+<!-- <div class="w-75" id="activeJot">
 
-    <!-- <div class="w-75" id="activeJot">
-
-      <div class="d-flex justify-content-between border-bottom border-2 border-light mb-3">
-        <h1>$this.title</h1> 
-        <h3>${this.dateUpdated}</h3>
-      </div>
-
-      <div class="form-floating">
-        <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label class="text-center" for="floatingTextarea">Jot it down!</label>
-      </div>
-    </div> -->
-
+  <div class="d-flex justify-content-between border-bottom border-2 border-light mb-3">
+    <h1>$this.title</h1> 
+    <h3>${this.dateUpdated}</h3>
   </div>
 
-</section>
+  <div class="form-floating">
+    <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+    <label class="text-center" for="floatingTextarea">Jot it down!</label>
+  </div>
+</div> -->
 
   <!-- <div class="col-2 bg-dark text-light rounded p-2" id="jots">
     <div class="row">
@@ -94,4 +136,3 @@
         <label class="text-center" for="floatingTextarea">Jot it down!</label>
       </div>
     </div> -->
-

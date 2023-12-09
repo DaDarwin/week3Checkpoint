@@ -1,5 +1,4 @@
 import { AppState } from "../AppState.js";
-import { JotController } from "../controllers/JotController.js";
 import { Jot } from "../models/Jot.js";
 import { loadState, saveState } from "../utils/Store.js";
 
@@ -15,6 +14,7 @@ class JotServices{
         const active = AppState.activeJot
         active.body = document.getElementById('jotBox').value
         active.dateUpdated = Date()
+        console.log(active)
 
         AppState.jots.forEach(jot => console.log('Index:',jot.id))
         let i = AppState.jots.findIndex(jot => jot.id == active.id)
@@ -30,9 +30,8 @@ class JotServices{
 
     saveJots(){
         saveState('Jots', AppState.jots)
-        console.log('saved')
       }
-    
+    //*STUB - Naming convention is irrelevant in the case of funny miss-clicks
       loadJots(){
         const coldJots = loadState('Jots', [Jot])
         AppState.jots = coldJots
