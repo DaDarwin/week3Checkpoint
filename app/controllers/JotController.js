@@ -12,8 +12,13 @@ function _drawJots(){
 }
 
 function _drawActiveJot(){
-    document.getElementById('activeJot').innerHTML = AppState.activeJot.jotBody
-    document.getElementById('jotBox').value = AppState.activeJot.body
+    if(AppState.activeJot){
+        document.getElementById('activeJot').innerHTML = AppState.activeJot.jotBody
+        document.getElementById('jotBox').value = AppState.activeJot.body}
+    else{
+        document.getElementById('activeJot').innerHTML = ''
+    }
+
 }
 
 export class JotController{
@@ -44,9 +49,5 @@ export class JotController{
        if(await Pop.confirm('Are You Sure?', "This Jot will be lost forever(That's a long time).", "Yes, I'm Sure")){
         jotServices.deleteJot(id)
        }
-    }
-
-    goHome(){
-        document.getElementById('jotBox').innerHtml = ''
     }
 }

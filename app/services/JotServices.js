@@ -45,12 +45,11 @@ class JotServices{
 
     deleteJot(id){  
         const i = AppState.jots.findIndex(jot => jot.id == id)
-        if(id == AppState.activeJot.id){
-            AppState.activeJot == null
-            JotController.goHome()
-        }
         AppState.jots.splice(i,1)
         this.saveJots()
+        if(id == AppState.activeJot.id){
+            AppState.activeJot = null
+        }
     }
 
 }
