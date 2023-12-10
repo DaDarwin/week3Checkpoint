@@ -74,6 +74,26 @@ class JotServices{
         AppState.pref = loadState('pref', Object)
     }
 
+    wordCount(body){
+        activeJot.wordCount = body.split(' ').length
+    }
+
+    // highlight(){
+    //     let words = AppState.activeJot.body.split(' ')
+    //     let highlightedWords = words.map(word => {
+
+    //         let highlighter = AppState.highlightersStart.includes(word.toLowerCase())
+    //         highlighter ? `<span style="color:${AppState.activeJot.color};">` : word
+
+    //         highlighter = AppState.highlightersEnd.includes(word.toLowerCase())
+    //         return highlighter ? `</span>`: word
+    //     })
+    //     console.log(highlightedWords)
+    //     return highlightedWords.join(' ')
+    // }
+
+
+
 }
 
 export const jotServices = new JotServices()

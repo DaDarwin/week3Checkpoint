@@ -6,7 +6,7 @@ import { Pop } from "../utils/Pop.js";
 function _goHome(){
     document.getElementById('Jot.').innerHTML = AppState.landing + AppState.offCanvas
     _drawJots()
-    clearInterval(_lastSaved)
+    clearInterval(AppState.updateDom)
 }
 function _drawJots(){
     const jots = AppState.jots
@@ -20,24 +20,59 @@ function _drawActiveJot(){
         document.getElementById('activeJot').innerHTML = AppState.nav
         document.getElementById('activeJot').innerHTML += AppState.activeJot.jotBody
         document.getElementById('jotBox').value = AppState.activeJot.body}
-    else{
-        _goHome()
+        else{
+            _goHome()
     }
 }
 
 function _drawNum(){
     if(document.getElementById('jotNum').innerText) document.getElementById('jotNum').innerText = ''
-
+    
     
     else document.getElementById('jotNum').innerText = `Jots: ${AppState.jots.length}`
 }
 
-let _lastSaved
+function _updateDom(){
+    _lastSaved()
+    _wordCount()
+    // let highlightedWords = jotServices.highlight()
+    // _highlight(highlightedWords)
+}
+
+function _lastSaved(){
+    AppState.changes = (document.getElementById('jotBox').value != AppState.activeJot.body)
+
+    if(AppState.changes){
+        let currentTime = new Date()
+        let lastSaved = new Date(AppState.activeJot.dateUpdated)
+        let time = (currentTime.getTime() - lastSaved.getTime()) / 1000
+
+        if(time > 3600){
+            document.getElementById('last-updated').innerText = `Last Saved: ${String(time / 3600).slice(0,3)} Hours ago`}
+
+        if(time > 60 && time < 3600){
+            if(Math.floor(time / 60) == 1) document.getElementById('last-updated').innerText = `Last Saved: 1 Minute ago`
+            document.getElementById('last-updated').innerText = `Last Saved: ${Math.floor(time / 60)} Minutes ago`}
+    }
+}
+
+function _wordCount(){
+    let body = document.getElementById('jotBox').value
+    jotServices.wordCount(body)
+    document.getElementById('wordCount').innerText = `Words: ${AppState.activeJot.wordCount}`
+}
+
+function _highlight(highlightedWords){
+    document.getElementById('jotBox').innerHTML = highlightedWords
+    // if (jotBox.)
+    // jotBox.
+}
+
 export class JotController{
 
     constructor(){
         console.log()
-
+        
         _goHome()
         AppState.on('jots', _drawJots)
         AppState.on('activeJot', _drawActiveJot)
@@ -56,7 +91,7 @@ export class JotController{
         
         if(id != 0 && 1){
             jotServices.selectJot(id)
-            _lastSaved = setInterval(this.lastSaved, 1000)
+            AppState.updateDom = setInterval(_updateDom, 1000)
         }
         if(id == 0) _goHome()
 
@@ -80,22 +115,5 @@ export class JotController{
     autoSave(){
         jotServices.autoSave()
     }
-
-    lastSaved(){
-        AppState.changes = (document.getElementById('jotBox').value != AppState.activeJot.body)
-
-        if(AppState.changes){let currentTime = new Date()
-        let lastSaved = new Date(AppState.activeJot.dateUpdated)
-        let time = (currentTime.getTime() - lastSaved.getTime()) / 1000
-        console.log(time)
-
-        if(time > 3600){
-            document.getElementById('last-updated').innerText = `Last Saved: ${time / 3600} Hours ago`
-        }
-        if(time > 60){
-            if(Math.floor(time / 60) == 1) document.getElementById('last-updated').innerText = `Last Saved: 1 Minute ago`
-            document.getElementById('last-updated').innerText = `Last Saved: ${Math.floor(time / 60)} Minutes ago`
-        }}
-
-    }
 }
+

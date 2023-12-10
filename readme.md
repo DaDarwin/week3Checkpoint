@@ -8,10 +8,15 @@ Uncaught TypeError: this._config is undefined
     <anonymous> offcanvas.js:257
     n event-handler.js:118
 
+
+
+<!-- FIXME -->
+
+    Highlighting with keyword !Jot
+
+    
 //TODO - {
 
-    word count
-    Highlighting with keyword !Jot
 
     Hefs (references){
         a side bar in the notes with option to hide

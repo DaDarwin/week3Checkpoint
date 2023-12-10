@@ -9,13 +9,13 @@ export class Jot{
         this.title = data.title
         this.body = data.body || ''
         this.color = data.color
+        this.wordCount = 0
         
         this.type = data.type
         this.dateCreated = data.dateCreated || Date()
         this.dateUpdated = data.dateUpdated || new Date()
         this.hefs = []
     }
-
 
     get jotIcon(){
         return `
@@ -42,8 +42,12 @@ export class Jot{
         <div class="w-75">
 
         <div class="d-flex justify-content-between align-items-end border-bottom border-2 border-light mb-3">
-          <h1>${this.title}</h1> 
-          <h4>${this.dateCreated.slice(4,this.dateCreated.length - 43)}</h4>
+            <h1>${this.title}</h1> 
+            
+            <div class="d-flex">
+                <h4 id="wordCount" class="pe-3">Words: ${this.wordCount}</h4>  
+                <h4>${this.dateCreated.slice(4,this.dateCreated.length - 43)}</h4>
+            </div>
         </div>
   
         <div class="form-floating">

@@ -12,6 +12,8 @@ class ObservableAppState extends EventEmitter {
   /**@type {Jot} */
   activeJot = null
   
+  updateDom = null
+
   pref = {
     autoSave: {
       name: 'autosave',
@@ -23,6 +25,10 @@ class ObservableAppState extends EventEmitter {
   }
   
   changes = false
+
+  highlightersStart = ['!jot', '!j']
+
+  highlightersEnd = ['jot!', 'j!']
 
   landing = `<div id="activeJot" class="row justify-content-center"><div id="landing" class="landing d-flex justify-content-center align-items-center">
     <span class="landing-logo p-0 border-bottom border-3 border-light bg-dark px-3 pb-1" data-bs-toggle="offcanvas" data-bs-target="#jotList">J<i class="mdi mdi-circle-edit-outline"></i>T.</span>
