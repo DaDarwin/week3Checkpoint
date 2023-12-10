@@ -25,11 +25,9 @@ function _drawActiveJot(){
     }
 }
 
-function _drawNum(){
-    if(document.getElementById('jotNum').innerText) document.getElementById('jotNum').innerText = ''
-    
-    
-    else document.getElementById('jotNum').innerText = `Jots: ${AppState.jots.length}`
+function _drawdropDown(){
+    if(AppState.dropDownOn) document.getElementById('jotNum').innerHTML = ''
+    else document.getElementById('dropdown').innerHTML = AppState.dropDown
 }
 
 function _updateDom(){
@@ -62,11 +60,11 @@ function _wordCount(){
     document.getElementById('wordCount').innerText = `Words: ${AppState.activeJot.wordCount}`
 }
 
-function _highlight(highlightedWords){
-    document.getElementById('jotBox').innerHTML = highlightedWords
+// function _highlight(highlightedWords){
+//     document.getElementById('jotBox').innerHTML = highlightedWords
     // if (jotBox.)
     // jotBox.
-}
+// }
 
 export class JotController{
 
@@ -95,7 +93,7 @@ export class JotController{
         }
         if(id == 0) _goHome()
 
-        else _drawNum()
+        else _drawdropDown()
     }
 
     saveActive(){

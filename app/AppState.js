@@ -26,6 +26,8 @@ class ObservableAppState extends EventEmitter {
   
   changes = false
 
+  dropDownOn = false
+
   highlightersStart = ['!jot', '!j']
 
   highlightersEnd = ['jot!', 'j!']
@@ -65,11 +67,12 @@ class ObservableAppState extends EventEmitter {
 
       <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close" title="Close Menu"> <i class="mdi mdi-window-close fs-4"></i> </button>
       
-    </div>
-    
-    <div class="d-flex flex-column justify-content-between sidebar">
+  </div>
+  
+  <div id="dropdown" class="d-flex offcanvas"> </div>
 
-      <h5 id="jotNum" class="m-2"></h5>
+      <div class="d-flex flex-column justify-content-between sidebar">
+
       
       <div class="offcanvas-body" id="jots"></div>
 
@@ -93,6 +96,11 @@ class ObservableAppState extends EventEmitter {
     </div>
     
     </div>`
+
+  dropDown = `
+    <h5 id="num" class="m-2"></h5>
+    
+    <select id="types"></select>`
 
 }
 export const AppState = createObservableProxy(new ObservableAppState())
