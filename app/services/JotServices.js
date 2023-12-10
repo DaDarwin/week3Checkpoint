@@ -2,29 +2,31 @@ import { AppState } from "../AppState.js";
 import { Jot } from "../models/Jot.js";
 import { loadState, saveState } from "../utils/Store.js";
 
-
-
 class JotServices{
-
+    
+    constructor(){
+    }
+    
     selectJot(id){
         AppState.activeJot = AppState.jots.find(jot => jot.id == id)
+        if(AppState.pref.autoSave.state){
+            AppState.pref.autoSave.function = setInterval( this.saveActive, AppState.pref.autoSave.autoSaveInterval)
+        }
     }
 
     saveActive(){
         const active = AppState.activeJot
         active.body = document.getElementById('jotBox').value
         active.dateUpdated = new Date()
-        console.log(active)
 
-        AppState.jots.forEach(jot => console.log('Index:',jot.id))
         let i = AppState.jots.findIndex(jot => jot.id == active.id)
 
         if(i >= 0){
             AppState.jots[i] = active
             AppState.emit('activeJot')
-            this.saveJots()}
-        else{
-            /**TODO - File Not Found Popup */
+            // Called it this way so the autosave interval can access it
+            jotServices.saveJots()
+            // **TODO - Notification
         }
     }
 
@@ -49,6 +51,27 @@ class JotServices{
         if(id == AppState.activeJot.id){
             AppState.activeJot = null
         }
+    }
+
+    autoSave(){
+        if(!AppState.pref.autoSave.state){
+            AppState.pref.autoSave.function =  setInterval(this.saveActive, AppState.pref.autoSave.interval)
+            AppState.pref.autoSave.state = true
+            this.savePref()
+        }
+        else {
+            clearInterval(AppState.pref.autoSave.function)
+            AppState.pref.autoSave.state = false
+            this.savePref()
+        }
+    }
+
+    savePref(){
+        saveState('pref', AppState.pref)
+    }
+
+    loadPref(){
+        AppState.pref = loadState('pref', Object)
     }
 
 }

@@ -12,6 +12,18 @@ class ObservableAppState extends EventEmitter {
   /**@type {Jot} */
   activeJot = null
   
+  pref = {
+    autoSave: {
+      name: 'autosave',
+      state: true,
+      interval: 60000,
+      function:null,
+    }
+  
+  }
+  
+  changes = false
+
   landing = `<div id="activeJot" class="row justify-content-center"><div id="landing" class="landing d-flex justify-content-center align-items-center">
     <span class="landing-logo p-0 border-bottom border-3 border-light bg-dark px-3 pb-1" data-bs-toggle="offcanvas" data-bs-target="#jotList">J<i class="mdi mdi-circle-edit-outline"></i>T.</span>
     </div></div>`
@@ -24,9 +36,17 @@ class ObservableAppState extends EventEmitter {
 
   <h1 class="jot-logo border-bottom border-light" onclick="app.JotController.selectJot(null)">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
 
-  <button class="btn btn-outline-light px-2 py-0 m-2" onclick="app.JotController.saveActive()">
-    <i class="fs-3 mdi mdi-floppy"></i>
-  </button>
+  <div>
+
+    <button class="btn btn-outline-light px-2 py-0 m-2" onclick="app.JotController.autoSave()" title="Auto-Save">
+      <i class="fs-3 mdi mdi-content-save-cog-outline"></i>
+    </button>
+
+    <button class="btn btn-outline-light px-2 py-0 m-2" onclick="app.JotController.saveActive()" title="Save">
+      <i class="fs-3 mdi mdi-floppy"></i>
+    </button>
+
+  </div>
 </nav>
 
     <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot"></div>`

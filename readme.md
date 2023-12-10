@@ -8,6 +8,24 @@ Uncaught TypeError: this._config is undefined
     <anonymous> offcanvas.js:257
     n event-handler.js:118
 
+//TODO - {
 
-    Date()
-    
+    word count
+    Highlighting with keyword !Jot
+
+    Hefs (references){
+        a side bar in the notes with option to hide
+    }
+
+
+    add a filter by type{
+        also allow the user to create new types
+    }
+
+}
+
+
+<!-- STUB -->
+    in JotController on lines 91 -> 93{
+        conditional strings?
+    }

@@ -3,13 +3,17 @@ import { generateId } from "../utils/GenerateId.js"
 export class Jot{
 
     constructor(data){
+
+        this.id = data.id || generateId()
+
         this.title = data.title
         this.body = data.body || ''
-        this.type = data.type
-        this.id = data.id || generateId()
         this.color = data.color
+        
+        this.type = data.type
         this.dateCreated = data.dateCreated || Date()
-        this.dateUpdated = data.dateUpdated || ''
+        this.dateUpdated = data.dateUpdated || new Date()
+        this.hefs = []
     }
 
 
@@ -32,7 +36,7 @@ export class Jot{
         </div>
             `
     }
-    /**NOTE - Ask about the date using or (||) for templates */
+ 
     get jotBody(){
         return `
         <div class="w-75">
@@ -45,8 +49,12 @@ export class Jot{
         <div class="form-floating">
         <label class="text-center w-100 h-100" for="jotBox" style="color:${this.color}">Jot it down!</label>
         <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
-        <h6 class="w-100 text-center mt-1">Last Saved: ${this.dateUpdated.slice(4,this.dateUpdated.length - 47)} @ ${this.dateUpdated.slice(16, 21)}</h6>
+        <h6 id="last-updated" class="w-100 text-center mt-1"></h6>
         </div>
       </div>`
+    }
+
+    get jotHef(){
+        return ``
     }
 }
