@@ -4,9 +4,6 @@ import { createObservableProxy } from './utils/ObservableProxy.js'
 
 class ObservableAppState extends EventEmitter {
 
-  /**@type {import('./models/Example.js').Example[]} */
-  examples = []
-  
   jots = []
 
   /**@type {Jot} */
@@ -14,11 +11,15 @@ class ObservableAppState extends EventEmitter {
   
   updateDom = null
 
+  timeStamp = null
+  lastSaved = null
+  wordCount = null
+
   pref = {
     autoSave: {
       name: 'autosave',
       state: true,
-      interval: 60000,
+      interval: 300000,
       function:null,
     }
   
@@ -26,9 +27,17 @@ class ObservableAppState extends EventEmitter {
   
   changes = false
 
-  dropDownOn = false
+  dom =[
+    {
+      name:'dropDown',
+      value:true,
+    },
+    {
+      name:'addJot',
+      value:true,
+    },
 
-  num = false
+  ]
 
   highlightersStart = ['!jot', '!j']
 
@@ -61,44 +70,44 @@ class ObservableAppState extends EventEmitter {
 
     <div class="m-0 bg-dark text-light d-flex justify-content-center activeJot" id="activeJot"></div>`
 
-  offCanvas = `<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="jotList" aria-labelledby="jotCanvas">
+  // offCanvas = `<div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="jotList" aria-labelledby="jotCanvas">
     
-  <div class="offcanvas-header border-bottom border-2 border-light">
+  // <div class="offcanvas-header border-bottom border-2 border-light">
     
-      <h1 class="offcanvas-title jot-logo" id="jotCanvas" onclick="app.JotController.selectJot(1)" title="Show Number of Jots">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
+  //     <h1 class="offcanvas-title jot-logo" id="jotCanvas" onclick="app.JotController.selectJot(1)" title="Show Number of Jots">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
 
-      <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close" title="Close Menu"> <i class="mdi mdi-window-close fs-4"></i> </button>
+  //     <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close" title="Close Menu"> <i class="mdi mdi-window-close fs-4"></i> </button>
       
       
-      </div>
+  //     </div>
       
-      <h5 id="jotNum"> </h5>
+  //     <h5 id="jotNum"> </h5>
 
-      <div class="d-flex flex-column justify-content-between sidebar">
+  //     <div class="d-flex flex-column justify-content-between sidebar">
 
       
-      <div class="offcanvas-body" id="jots"></div>
+  //     <div class="offcanvas-body" id="jots"></div>
 
-      <div class="container-fluid">
-        <form onsubmit="app.JotController.addJot()" id="addJot" class="row border border-light p-2 rounded">
-          <div class="w-100 ">
-            <input id="title" required type="text" minlength="3" maxlength="15" class="form-control w-100 m-1 px-5" name="title" title="Name Your Jot">
-          </div>
-          <div class="d-flex justify-content-around w-100 px-2">
-            <input type="color" name="color" class="form-control h-75 w-50 m-1 bg-dark" title="Choose a Jot Color" value="#e9ecef">
-            <select name="type" class="form-control h-75 w-25 m-1 bg-dark text-light">
-              <option value="mdi mdi-file-outline">Jot</option>
-              <option value="mdi mdi-file-account-outline">Personal Jot</option>
-              <option value="mdi mdi-file-cog-outline">Important Jot</option>
-            </select>
-            <button class="btn btn-outline-light rounded-end-3 h-75 w-25 m-1" title="New Jot"><i class="mdi mdi-file"></i></button>
-          </div>
-        </form>
-      </div>
+  //     <div class="container-fluid">
+  //       <form onsubmit="app.JotController.addJot()" id="addJot" class="row border border-light p-2 rounded">
+  //         <div class="w-100 ">
+  //           <input id="title" required type="text" minlength="3" maxlength="15" class="form-control w-100 m-1 px-5" name="title" title="Name Your Jot">
+  //         </div>
+  //         <div class="d-flex justify-content-around w-100 px-2">
+  //           <input type="color" name="color" class="form-control h-75 w-50 m-1 bg-dark" title="Choose a Jot Color" value="#e9ecef">
+  //           <select name="type" class="form-control h-75 w-25 m-1 bg-dark text-light">
+  //             <option value="mdi mdi-file-outline">Jot</option>
+  //             <option value="mdi mdi-file-account-outline">Personal Jot</option>
+  //             <option value="mdi mdi-file-cog-outline">Important Jot</option>
+  //           </select>
+  //           <button class="btn btn-outline-light rounded-end-3 h-75 w-25 m-1" title="New Jot"><i class="mdi mdi-file"></i></button>
+  //         </div>
+  //       </form>
+  //     </div>
 
-    </div>
+  //   </div>
     
-    </div>`
+  //   </div>`
 
   dropDown = `
     <h5 id="num" class="m-2"></h5>

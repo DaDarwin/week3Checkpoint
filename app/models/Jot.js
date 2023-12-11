@@ -14,7 +14,8 @@ export class Jot{
         this.type = data.type
         this.dateCreated = data.dateCreated || Date()
         this.dateUpdated = data.dateUpdated || new Date()
-        this.hefs = []
+        this.lastUpdated = data.lastUpdated || ''
+        this.hefs = data.hefs || []
     }
 
     get jotIcon(){
@@ -23,7 +24,7 @@ export class Jot{
 
             <div class="row align-items-baseline justify-content-between">
 
-                <div class="w-75" onclick="app.JotController.selectJot('${this.id}')" title="Open ${this.title}" data-bs-toggle="offcanvas">
+                <div class="w-75" onclick="app.JotController.selectJot('${this.id}')" title="Open ${this.title}" data-bs-toggle="offcanvas" data-bs-target="#jotCanvas">
                     <h4>${this.title} <i class="${this.type} w-25 fs-4" style="color:${this.color}!important;"></i></h4>
                 </div> 
                 
@@ -53,7 +54,7 @@ export class Jot{
         <div class="form-floating">
         <label class="text-center w-100 h-100" for="jotBox" style="color:${this.color}">Jot it down!</label>
         <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
-        <h6 id="last-updated" class="w-100 text-center mt-1"></h6>
+        <h6 id="lastUpdated" class="w-100 text-center mt-1">${this.lastUpdated}</h6>
         </div>
       </div>`
     }

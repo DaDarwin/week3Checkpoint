@@ -26,6 +26,7 @@ class JotServices{
             AppState.emit('activeJot')
             // Called it this way so the autosave interval can access it
             jotServices.saveJots()
+            console.log('Saved')
             // **TODO - Notification
         }
     }
@@ -50,6 +51,7 @@ class JotServices{
         this.saveJots()
         if(id == AppState.activeJot.id){
             AppState.activeJot = null
+            clearInterval(AppState.updateDom)
         }
     }
 
@@ -75,9 +77,11 @@ class JotServices{
     }
 
     wordCount(body){
-        console.log(body.split(' '))
         AppState.activeJot.wordCount = body.split(' ').length
-        console.log(AppState.activeJot.wordCount)
+    }
+
+    saveTime(){
+        AppState.activeJot.dateUpdated = new Date()
     }
 
     // highlight(){
