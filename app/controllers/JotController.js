@@ -25,8 +25,8 @@ function _drawActiveJot(){
     }
 }
 
-function _drawdropDown(){
-    if(AppState.dropDownOn) document.getElementById('jotNum').innerHTML = ''
+function _drawDropDown(){
+    if(AppState.dropDownOn) document.getElementById('dropdown').innerHTML = ''
     else document.getElementById('dropdown').innerHTML = AppState.dropDown
 }
 
@@ -93,7 +93,7 @@ export class JotController{
         }
         if(id == 0) _goHome()
 
-        else _drawdropDown()
+        else _drawDropDown()
     }
 
     saveActive(){

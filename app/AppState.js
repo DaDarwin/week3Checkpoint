@@ -42,7 +42,7 @@ class ObservableAppState extends EventEmitter {
     <i class="fs-3 mdi mdi-menu"></i>
   </button>
 
-  <h1 class="jot-logo border-bottom border-light" onclick="app.JotController.selectJot(null)">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
+  <h1 class="jot-logo border-bottom border-light" onclick="app.JotController.selectJot(0)">J<i class="mdi mdi-circle-edit-outline fs-3"></i>T.</h1>
 
   <div>
 
