@@ -55,16 +55,18 @@ function _drawActiveJot(){
         document.getElementById('activeJot').innerHTML = AppState.nav
         document.getElementById('activeJot').innerHTML += AppState.activeJot.jotBody
         document.getElementById('jotBox').value = AppState.activeJot.body}
+        // new Date(AppState.activeJot.dateUpdated).toLocaleString().slice(10,3)}
         else{
             _goHome()
     }
 }
 
 function _lastSaved(){
-        if(AppState.changes){let currentTime = new Date()
-        let lastSaved = AppState.timeStamp
-        let lastUpdated = ''
-        const time = Math.floor((currentTime.getTime() - lastSaved.getTime()) / 1000)
+    AppState.changes = (document.getElementById('jotBox').value != AppState.activeJot.body)
+    let lastSaved = AppState.timeStamp
+    let lastUpdated = ''
+    const time = Math.floor((currentTime.getTime() - lastSaved.getTime()) / 1000)
+    if(AppState.changes){let currentTime = new Date()
         
         if(time < 60){lastUpdated = `Last Updated: ${time} Seconds ago`}
         
@@ -80,11 +82,12 @@ function _lastSaved(){
 
         document.getElementById('lastUpdated').innerText = lastUpdated
         AppState.activeJot.lastUpdated = lastUpdated}
-        else {
-            clearInterval(AppState.lastSaved)
-            clearInterval(AppState.lastSaved)
-            AppState.updateDom = setInterval(_updateActiveDom, 100)
-        }
+    else {
+        clearInterval(AppState.lastSaved)
+        clearInterval(AppState.lastSaved)
+        AppState.updateDom = setInterval(_updateActiveDom, 100)
+        AppState.activeJot.lastUpdated = new Date()
+    }
     
     }
 

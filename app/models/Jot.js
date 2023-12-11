@@ -54,7 +54,7 @@ export class Jot{
         <div class="form-floating">
         <label class="text-center w-100 h-100" for="jotBox" style="color:${this.color}">Jot it down!</label>
         <textarea class="form-control bg-dark w-100 text-light jotBox" placeholder="Leave a comment here" id="jotBox"></textarea>
-        <h6 id="lastUpdated" class="w-100 text-center mt-1">${this.lastUpdated}</h6>
+        <h6 id="lastUpdated" class="w-100 text-center mt-1">${new Date(this.dateUpdated).toLocaleString()}</h6>
         </div>
       </div>`
     }
