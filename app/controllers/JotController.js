@@ -26,8 +26,14 @@ function _drawActiveJot(){
 }
 
 function _drawDropDown(){
-    if(AppState.dropDownOn) document.getElementById('dropdown').innerHTML = ''
-    else document.getElementById('dropdown').innerHTML = AppState.dropDown
+    console.log('hi')
+    if(!AppState.num){
+         document.getElementById('jotNum').innerText = `Number of Jots: ${AppState.jots.length}`
+         AppState.num = true
+        console.log('on')}
+    else  {document.getElementById('jotNum').innerText = ''
+        AppState.num = false
+        console.log('off')}
 }
 
 function _updateDom(){
@@ -87,13 +93,13 @@ export class JotController{
         if(AppState.changes) if(await Pop.confirm('You have Unsaved Changes', "Would You like to save your changes?", "Yes")) jotServices.saveActive()
 
         
-        if(id != 0 && 1){
+        if(id != 0 && id != 1){
             jotServices.selectJot(id)
             AppState.updateDom = setInterval(_updateDom, 1000)
         }
         if(id == 0) _goHome()
 
-        else _drawDropDown()
+        if(id == 1) _drawDropDown()
     }
 
     saveActive(){

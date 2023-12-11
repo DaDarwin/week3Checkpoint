@@ -28,6 +28,8 @@ class ObservableAppState extends EventEmitter {
 
   dropDownOn = false
 
+  num = false
+
   highlightersStart = ['!jot', '!j']
 
   highlightersEnd = ['jot!', 'j!']
@@ -67,9 +69,10 @@ class ObservableAppState extends EventEmitter {
 
       <button type="button" class="btn btn-outline-light px-3" data-bs-dismiss="offcanvas" aria-label="Close" title="Close Menu"> <i class="mdi mdi-window-close fs-4"></i> </button>
       
-  </div>
-  
-  <div id="dropdown" class="d-flex offcanvas"> </div>
+      
+      </div>
+      
+      <h5 id="jotNum"> </h5>
 
       <div class="d-flex flex-column justify-content-between sidebar">
 
