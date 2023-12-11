@@ -26,17 +26,21 @@ function _drawActiveJot(){
 }
 
 function _drawDropDown(){
-    console.log('hi')
+    _drawJotNum()
+}
+
+function _drawJotNum(){
+
     if(!AppState.num){
          document.getElementById('jotNum').innerText = `Number of Jots: ${AppState.jots.length}`
          AppState.num = true
-        console.log('on')}
+    }
     else  {document.getElementById('jotNum').innerText = ''
         AppState.num = false
-        console.log('off')}
+    }
 }
 
-function _updateDom(){
+function _updateActiveDom(){
     _lastSaved()
     _wordCount()
     // let highlightedWords = jotServices.highlight()
@@ -46,22 +50,25 @@ function _updateDom(){
 function _lastSaved(){
     AppState.changes = (document.getElementById('jotBox').value != AppState.activeJot.body)
 
-    if(AppState.changes){
-        let currentTime = new Date()
-        let lastSaved = new Date(AppState.activeJot.dateUpdated)
-        let time = (currentTime.getTime() - lastSaved.getTime()) / 1000
+    let currentTime = new Date()
+    let lastSaved = new Date(AppState.activeJot.dateUpdated)
+    let time = (currentTime.getTime() - lastSaved.getTime()) / 1000
 
-        if(time > 3600){
-            document.getElementById('last-updated').innerText = `Last Saved: ${String(time / 3600).slice(0,3)} Hours ago`}
+    if(time > 3600){
+        document.getElementById('last-updated').innerText = `Last Saved: ${String(time / 3600).slice(0,3)} Hours ago`}
 
-        if(time > 60 && time < 3600){
-            if(Math.floor(time / 60) == 1) document.getElementById('last-updated').innerText = `Last Saved: 1 Minute ago`
-            document.getElementById('last-updated').innerText = `Last Saved: ${Math.floor(time / 60)} Minutes ago`}
-    }
+    if(time > 60 && time < 3600){
+        if(Math.floor(time / 60) == 1) document.getElementById('last-updated').innerText = `Last Saved: 1 Minute ago`
+        document.getElementById('last-updated').innerText = `Last Updated: ${Math.floor(time / 60)} Minutes ago`}
+
+    if(time < 60){document.getElementById('last-updated').innerText = `Last Updated: ${time} Seconds ago`}
+    
 }
 
 function _wordCount(){
+    console.log('c')
     let body = document.getElementById('jotBox').value
+    console.log(body)
     jotServices.wordCount(body)
     document.getElementById('wordCount').innerText = `Words: ${AppState.activeJot.wordCount}`
 }
@@ -95,7 +102,7 @@ export class JotController{
         
         if(id != 0 && id != 1){
             jotServices.selectJot(id)
-            AppState.updateDom = setInterval(_updateDom, 1000)
+            AppState.updateDom = setInterval(_updateActiveDom, 1000)
         }
         if(id == 0) _goHome()
 

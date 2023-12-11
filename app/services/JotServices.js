@@ -75,7 +75,9 @@ class JotServices{
     }
 
     wordCount(body){
-        activeJot.wordCount = body.split(' ').length
+        console.log(body.split(' '))
+        AppState.activeJot.wordCount = body.split(' ').length
+        console.log(AppState.activeJot.wordCount)
     }
 
     // highlight(){

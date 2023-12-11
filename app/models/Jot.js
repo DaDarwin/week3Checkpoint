@@ -9,7 +9,7 @@ export class Jot{
         this.title = data.title
         this.body = data.body || ''
         this.color = data.color
-        this.wordCount = 0
+        this.wordCount = data.wordCount || 0
         
         this.type = data.type
         this.dateCreated = data.dateCreated || Date()
