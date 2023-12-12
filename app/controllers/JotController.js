@@ -65,8 +65,9 @@ function _lastSaved(){
     AppState.changes = (document.getElementById('jotBox').value != AppState.activeJot.body)
     let lastSaved = AppState.timeStamp
     let lastUpdated = ''
+    let currentTime = new Date()
     const time = Math.floor((currentTime.getTime() - lastSaved.getTime()) / 1000)
-    if(AppState.changes){let currentTime = new Date()
+    if(AppState.changes){
         
         if(time < 60){lastUpdated = `Last Updated: ${time} Seconds ago`}
         

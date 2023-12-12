@@ -1,6 +1,7 @@
 import { AppState } from "../AppState.js";
 import { Jot } from "../models/Jot.js";
 import { loadState, saveState } from "../utils/Store.js";
+import { Pop } from "../utils/Pop.js";
 
 class JotServices{
     
@@ -26,8 +27,7 @@ class JotServices{
             AppState.emit('activeJot')
             // Called it this way so the autosave interval can access it
             jotServices.saveJots()
-            console.log('Saved')
-            // **TODO - Notification
+            Pop.toast(`${AppState.activeJot.title} Saved`)
         }
     }
 
@@ -60,11 +60,13 @@ class JotServices{
             AppState.pref.autoSave.function =  setInterval(this.saveActive, AppState.pref.autoSave.interval)
             AppState.pref.autoSave.state = true
             this.savePref()
+            Pop.toast(`Autosave On`)
         }
         else {
             clearInterval(AppState.pref.autoSave.function)
             AppState.pref.autoSave.state = false
             this.savePref()
+            Pop.toast('Autosave Off')
         }
     }
 
@@ -77,7 +79,13 @@ class JotServices{
     }
 
     wordCount(body){
-        AppState.activeJot.wordCount = body.split(' ').length
+        let words = body.split(' ')
+        if(words[0] == ''){
+            AppState.activeJot.wordCount = 0
+        }
+        if(words[0]){
+            AppState.activeJot.wordCount = words.length
+        }
     }
 
     saveTime(){

@@ -62,4 +62,8 @@ export class Jot{
     get jotHef(){
         return ``
     }
+
+    get saveNotification(){
+        
+    }
 }
